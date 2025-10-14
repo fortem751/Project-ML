@@ -47,7 +47,7 @@ This repository contains a complete solution for deploying a Deep Learning infer
 **2. Run the Application**.
 The command below builds the images and starts both the api and gui containers in detached mode (-d).
 
-- docker compose up -d --build # This command uses the docker-compose.yml file to orchestrate the build and run
+- docker compose up -d --build&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # This command uses the docker-compose.yml file to orchestrate the build and run
 
 Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia option, along with parameters like shm_size: '2gb', to utilize the GPU if the NVIDIA Container Toolkit is available on the host.
 
@@ -55,7 +55,7 @@ Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia opt
 
 - docker ps
 
-- http://localhost:8080 # Access the GUI: Open your web browser to the mapped port. The GUI container (running Gradio on port 7860) will be accessible on the host via port 8080.
+- http://localhost:8080&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # Access the GUI: Open your web browser to the mapped port. The GUI container (running Gradio on port 7860) will be accessible on the host via port 8080.
 
 **Cleanup** : To stop and remove all containers and the network created by Docker Compose:
 
