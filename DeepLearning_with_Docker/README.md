@@ -26,23 +26,24 @@ This repository contains a complete solution for deploying a Deep Learning infer
 
 ## Project Structure
 .
-├── app_api/                      # Inference Container (FastAPI + PyTorch)
-│   ├── api.py                    # FastAPI server exposing the /predict/ endpoint
-│   ├── Dockerfile.api            # Docker build instructions
-│   └── requirements_api.txt      # Python dependencies (torch, fastapi, python-multipart, etc.)
-├── app_gui/                      # GUI Container (Gradio)
-│   ├── gui.py                    # Gradio frontend that calls the API container
-│   ├── Dockerfile.gui            # Docker build instructions
-│   └── requirements_gui.txt      # Python dependencies (gradio, requests)
-└── docker-compose.yml            # Orchestration file defining both services
+├── app_api/                      # Inference Container (FastAPI + PyTorch).
+│   ├── api.py                    # FastAPI server exposing the /predict/ endpoint.
+│   ├── Dockerfile.api            # Docker build instructions.
+│   └── requirements_api.txt      # Python dependencies (torch, fastapi, python-multipart, etc.).
+├── app_gui/                      # GUI Container (Gradio).
+│   ├── gui.py                    # Gradio frontend that calls the API container.
+│   ├── Dockerfile.gui            # Docker build instructions.
+│   └── requirements_gui.txt      # Python dependencies (gradio, requests).
+└── docker-compose.yml            # Orchestration file defining both services.
 
 ## Setup and Execution
-1. Clone the Repository
-**Bash**
-git clone https://github.com/fortem751/Project-ML.git
-cd DeepLearning_with_Docker
+1. Clone the Repository.
 
-2. Run the Application
+**Bash**:
+git clone https://github.com/fortem751/Project-ML.git:
+cd DeepLearning_with_Docker:
+
+2. Run the Application:
 The command below builds the images and starts both the api and gui containers in detached mode (-d).
 
 **Bash**
