@@ -36,7 +36,8 @@ This repository contains a complete solution for deploying a Deep Learning infer
 - gui.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                       **# Gradio frontend that calls the API container.**
 - Dockerfile.gui&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**# Docker build instructions.**
 - requirements_gui.txt&emsp;&emsp;&emsp;         **# Python dependencies (gradio, requests).**
-- docker-compose.yml&emsp;&emsp;&emsp;           **# Orchestration file defining both services.**
+
+**docker-compose.yml**&emsp;&emsp;&emsp;           **# Orchestration file defining both services.**
 
 ## Setup and Execution
 **1. Clone the Repository**.
