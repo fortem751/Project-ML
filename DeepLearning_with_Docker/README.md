@@ -38,6 +38,7 @@ Deeplearning_with_Docker/
 │ ├── Dockerfile.gui # Docker build instructions
 │ └── requirements_gui.txt # GUI dependencies
 └── docker-compose.yml # Docker Compose orchestration
+```
 
 ## Setup and Execution
 **1. Clone the Repository**.
