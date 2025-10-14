@@ -59,4 +59,4 @@ Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia opt
 
 **Cleanup** : To stop and remove all containers and the network created by Docker Compose:
 
-- docker compose down
+- # docker compose down
