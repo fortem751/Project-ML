@@ -24,15 +24,26 @@ This repository contains a complete solution for deploying a Deep Learning infer
 
 - The NVIDIA Container Toolkit must be installed and configured.
 
+docker-dl-assignment/
+├── app_api/                      # Inference Container (FastAPI + PyTorch)
+│   ├── api.py                    # FastAPI server exposing the /predict/ endpoint
+│   ├── Dockerfile.api            # Docker build instructions
+│   └── requirements_api.txt      # API dependencies
+├── app_gui/                      # GUI Container (Gradio)
+│   ├── gui.py                    # Gradio frontend that calls the API container
+│   ├── Dockerfile.gui            # Docker build instructions
+│   └── requirements_gui.txt      # GUI dependencies
+└── docker-compose.yml            # Docker Compose orchestration
+
 ## Project Structure
 
-**app_api/**&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Inference Container (FastAPI + PyTorch).
-- api.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                       # FastAPI server exposing the /predict/ endpoint.
-- Dockerfile.api&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;               # Docker build instructions.
-- requirements_api.txt&emsp;&emsp;&emsp;         # Python dependencies (torch, fastapi, python-multipart, etc.).
+**app_api/**&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**# Inference Container (FastAPI + PyTorch).**
+- api.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                       **# FastAPI server exposing the /predict/ endpoint.**
+- Dockerfile.api&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;               **# Docker build instructions.**
+- requirements_api.txt&emsp;&emsp;&emsp;         **# Python dependencies (torch, fastapi, python-multipart, etc.).**
 
-**app_gui/**&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;                  # GUI Container (Gradio).
-- gui.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                       # Gradio frontend that calls the API container.
+**app_gui/**&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;                  **# GUI Container (Gradio).**
+- gui.py&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                       **# Gradio frontend that calls the API container.
 - Dockerfile.gui&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;               # Docker build instructions.
 - requirements_gui.txt&emsp;&emsp;&emsp;         # Python dependencies (gradio, requests).
 - docker-compose.yml&emsp;&emsp;&emsp;           # Orchestration file defining both services.
