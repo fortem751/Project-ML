@@ -39,19 +39,19 @@ This repository contains a complete solution for deploying a Deep Learning infer
 - docker-compose.yml&emsp;&emsp;&emsp;           **# Orchestration file defining both services.**
 
 ## Setup and Execution
-1. **Clone the Repository**.
+**1. Clone the Repository**.
 
 - git clone https://github.com/fortem751/Project-ML.git:
 - cd DeepLearning_with_Docker:
 
-2. **Run the Application**.
+**2. Run the Application**.
 The command below builds the images and starts both the api and gui containers in detached mode (-d).
 
 - docker compose up -d --build # This command uses the docker-compose.yml file to orchestrate the build and run
 
 Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia option, along with parameters like shm_size: '2gb', to utilize the GPU if the NVIDIA Container Toolkit is available on the host.
 
-3. **Verification and Access** :Confirm both services are running.
+**3. Verification and Access** :Confirm both services are running.
 
 - docker ps
 
