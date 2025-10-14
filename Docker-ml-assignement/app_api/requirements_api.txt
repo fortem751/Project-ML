@@ -1,0 +1,7 @@
+# app_api/requirements_api.txt
+torch
+torchvision
+fastapi
+uvicorn[standard]
+pillow
+python-multipart
