@@ -26,11 +26,11 @@ This repository contains a complete solution for deploying a Deep Learning infer
 
 ## Project Structure
 
-**app_api/**                      # Inference Container (FastAPI + PyTorch).
+**app_api/**................# Inference Container (FastAPI + PyTorch).
 - api.py                    # FastAPI server exposing the /predict/ endpoint.
 - Dockerfile.api            # Docker build instructions.
 - requirements_api.txt      # Python dependencies (torch, fastapi, python-multipart, etc.).
-**app_gui/**                      # GUI Container (Gradio).
+**app_gui/**                # GUI Container (Gradio).
 - gui.py                    # Gradio frontend that calls the API container.
 - Dockerfile.gui            # Docker build instructions.
 - requirements_gui.txt      # Python dependencies (gradio, requests).
