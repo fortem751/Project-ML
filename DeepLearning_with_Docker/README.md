@@ -62,7 +62,7 @@ Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia opt
 
 - docker compose down
 
-
+```bash
 docker-dl-assignment/
 ├── app_api/ # Inference Container (FastAPI + PyTorch)
 │ ├── api.py # FastAPI server exposing the /predict/ endpoint
