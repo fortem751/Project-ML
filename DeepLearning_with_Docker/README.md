@@ -55,8 +55,8 @@ Note on GPU: The docker-compose.yml is configured to use the runtime: nvidia opt
 
 - docker ps
 
-- http://localhost:8080 # Access the GUI: Open your web browser to the mapped port. The GUI container (running Gradio on port 7860) is accessible on your host via port 8080.
+- http://localhost:8080 # Access the GUI: Open your web browser to the mapped port. The GUI container (running Gradio on port 7860) will be accessible on the host via port 8080.
 
 **Cleanup** : To stop and remove all containers and the network created by Docker Compose:
 
-- # docker compose down
+- docker compose down
