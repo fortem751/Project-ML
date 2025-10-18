@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.api
     container_name: dl_api_server
 
-    # === NVIDIA GPU CONFIGURATION (For Maximum Grade) ===
+    # === NVIDIA GPU CONFIGURATION 
     # 1. Specifies the NVIDIA runtime driver (prerequisite: NVIDIA Container Toolkit on host)
     runtime: nvidia
     # 2. Allocates specific GPU resources (using 'all' for simplicity, or 'count: 1')
