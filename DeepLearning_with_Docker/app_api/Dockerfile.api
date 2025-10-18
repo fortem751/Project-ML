@@ -12,6 +12,8 @@ WORKDIR /app
 # Install Python dependencies first to leverage Docker cache
 # If requirements change often, this layer is rebuilt, but not the Python base
 COPY requirements_api.txt .
+COPY api.py .
+COPY imagenet_classes.txt .
 RUN pip install --no-cache-dir -r requirements_api.txt
 
 # Copy the rest of the application code
