@@ -17,7 +17,7 @@ COPY imagenet_classes.txt .
 RUN pip install --no-cache-dir -r requirements_api.txt
 
 # Copy the rest of the application code
-COPY . .
+COPY api.py .
 
 # Expose the port the API will run on (default uvicorn port)
 EXPOSE 8000
