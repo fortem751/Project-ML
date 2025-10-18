@@ -3,21 +3,20 @@
 # Use a lean base image
 FROM python:3.10-slim
 
-# Set up non-interactive environment for package installations (Good practice!) [cite: 25]
+# Set up non-interactive environment for package installations (Good practice!)
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Set the working directory
 WORKDIR /app
 
-# Install Python dependencies first to leverage Docker cache
-# If requirements change often, this layer is rebuilt, but not the Python base
+# 1. Install Python dependencies first to leverage Docker cache
+
 COPY requirements_api.txt .
-COPY api.py .
-COPY imagenet_classes.txt .
 RUN pip install --no-cache-dir -r requirements_api.txt
 
-# Copy the rest of the application code
-COPY api.py .
+# 2. Copy the rest of the application files, code, and assets.
+
+COPY imagenet_classes.txt .
 
 # Expose the port the API will run on (default uvicorn port)
 EXPOSE 8000

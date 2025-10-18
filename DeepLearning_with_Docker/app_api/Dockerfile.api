@@ -10,14 +10,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
 # 1. Install Python dependencies first to leverage Docker cache
-# This layer only rebuilds if requirements_api.txt changes.
+
 COPY requirements_api.txt .
 RUN pip install --no-cache-dir -r requirements_api.txt
 
 # 2. Copy the rest of the application files, code, and assets.
-# This layer rebuilds if api.py or imagenet_classes.txt changes, but it won't 
-# trigger the time-consuming pip install step above.
-COPY api.py .
+
 COPY imagenet_classes.txt .
 
 # Expose the port the API will run on (default uvicorn port)
