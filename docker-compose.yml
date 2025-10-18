@@ -1,34 +1,35 @@
-# docker-compose.yml
 version: '3.8'
 
 services:
-  # 1. The Inference API Service
+  # The Inference API Service (GPU-Accelerated)
   api:
     build:
       context: ./app_api
       dockerfile: Dockerfile.api
     container_name: dl_api_server
-    # Optional: If you meet the requirement for GPU usage 
-    # runtime: nvidia 
-    # environment:
-    #   NVIDIA_VISIBLE_DEVICES: all
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: 1
-    #           capabilities: [gpu]
-    
+
+    # === NVIDIA GPU CONFIGURATION 
+    # 1. Specifies the NVIDIA runtime driver (prerequisite: NVIDIA Container Toolkit on host)
+    runtime: nvidia
+    # 2. Allocates specific GPU resources (using 'all' for simplicity, or 'count: 1')
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    # 3. Allocates sufficient shared memory (critical for PyTorch/DL model loading)
+    shm_size: '2gb'
+    # ====================================================
+
     # Expose the port only internally for the GUI to access
     expose:
       - "8000"
-    
-    # Optional: Parameters for RAM limit, shared memory, etc. [cite: 28, 29]
-    # shm_size: '2gb'
+    # Optional: If you need to explicitly limit RAM
     # mem_limit: '4g'
 
-  # 2. The Graphical Interface Service
+    # The Graphical Interface Service
   gui:
     build:
       context: ./app_gui
@@ -37,7 +38,7 @@ services:
     # This is the only port we expose to your host machine (e.g., your browser)
     ports:
       - "8080:7860" # Map host port 8080 to container port 7860 (Gradio default)
-    
+
     # Ensures the API is running before the GUI tries to connect
     depends_on:
       - api
