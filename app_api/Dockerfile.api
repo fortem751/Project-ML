@@ -1,0 +1,27 @@
+# app_api/Dockerfile.api
+
+# Use a lean base image
+FROM python:3.10-slim
+
+# Set up non-interactive environment for package installations (Good practice!) [cite: 25]
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set the working directory
+WORKDIR /app
+
+# Install Python dependencies first to leverage Docker cache
+# If requirements change often, this layer is rebuilt, but not the Python base
+COPY requirements_api.txt .
+COPY api.py .
+COPY imagenet_classes.txt .
+RUN pip install --no-cache-dir -r requirements_api.txt
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the API will run on (default uvicorn port)
+EXPOSE 8000
+
+# Command to run the Uvicorn server
+# The host 0.0.0.0 is needed for container-to-container communication
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
