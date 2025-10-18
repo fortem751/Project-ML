@@ -1,0 +1,43 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # 1. The Inference API Service
+  api:
+    build:
+      context: ./app_api
+      dockerfile: Dockerfile.api
+    container_name: dl_api_server
+    # Optional: If you meet the requirement for GPU usage 
+    # runtime: nvidia 
+    # environment:
+    #   NVIDIA_VISIBLE_DEVICES: all
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    
+    # Expose the port only internally for the GUI to access
+    expose:
+      - "8000"
+    
+    # Optional: Parameters for RAM limit, shared memory, etc. [cite: 28, 29]
+    # shm_size: '2gb'
+    # mem_limit: '4g'
+
+  # 2. The Graphical Interface Service
+  gui:
+    build:
+      context: ./app_gui
+      dockerfile: Dockerfile.gui
+    container_name: gradio_interface
+    # This is the only port we expose to your host machine (e.g., your browser)
+    ports:
+      - "8080:7860" # Map host port 8080 to container port 7860 (Gradio default)
+    
+    # Ensures the API is running before the GUI tries to connect
+    depends_on:
+      - api

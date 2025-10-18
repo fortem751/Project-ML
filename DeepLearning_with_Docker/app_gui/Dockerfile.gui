@@ -1,0 +1,14 @@
+# app_gui/Dockerfile.gui
+FROM python:3.10-slim
+ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /app
+
+COPY requirements_gui.txt .
+RUN pip install --no-cache-dir -r requirements_gui.txt
+
+COPY . .
+
+# Gradio default port
+EXPOSE 7860
+
+CMD ["python", "gui.py"]
