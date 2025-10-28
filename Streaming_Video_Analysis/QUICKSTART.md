@@ -208,16 +208,7 @@ pip install -r requirements.txt
 FRAME_INTERVAL_SECONDS = 10  # Process less frequently
 ```
 
-## 📚 Next Steps
-
-Once you have the basic system running:
-
-1. **Read the [Full README](README.md)** for detailed configuration options
-2. **Check [CONTRIBUTING.md](CONTRIBUTING.md)** if you want to contribute
-3. **Review performance metrics** using the analysis scripts
-4. **Deploy to production** following security best practices
-
-## ⚡ Pro Tips
+## ⚡ Deployment Tips
 
 1. **Start simple**: Begin with local processing before moving to cloud
 2. **Test with short videos**: Use 30-60 second clips for initial testing
