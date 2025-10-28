@@ -125,57 +125,6 @@ transposition_table = TranspositionTable(max_size=1000000)
 - Formations (2x2, diamond, bridge)
 
 
-
-### 4. Search Optimizations
-
-#### Alpha-Beta with PVS
-```
-Principal Variation Search:
-- Full window for first move
-- Null window for others
-- Re-search if better than expected
-Result: 2-3x faster than plain alpha-beta
-```
-
-#### Null-Move Pruning
-```
-Skip our turn and see if opponent can still beat us:
-- If no: position is so good we can skip pruning
-- If yes: continue search normally
-Result: 20-30% node reduction
-```
-
-#### Late Move Reductions (LMR)
-```
-Search later moves at reduced depth:
-- First 4 moves: full depth
-- Moves 5-8: depth-1
-- Moves 9+: depth-2
-- Re-search if better than expected
-Result: 40-50% time savings
-```
-
-#### Aspiration Windows
-```
-Search with narrow window around previous score:
-- Faster if within window
-- Re-search if outside
-Result: 15-25% speedup in iterative deepening
-```
-
-### 5. Move Ordering
-```
-Priority (best first):
-1. PV move from transposition table
-2. Immediate wins
-3. Block immediate losses
-4. Killer moves (caused cutoffs before)
-5. History heuristic (good moves in past)
-6. Moves sorted by static evaluation
-
-Result: Earlier cutoffs = faster search
-```
-
 ## 📊 Performance Characteristics
 
 ### Typical Performance (5-second limit, depth 5)
