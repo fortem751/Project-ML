@@ -1,15 +1,5 @@
-# Professional Connect 6 Engine - Complete Edition
+# Connect 6 Engine - ECOJMB
 
-## 🎯 Design Philosophy
-
-This is a **production-grade** Connect 6 engine designed to compete against strong opponents like Cloudict. It implements every major technique from professional game AI:
-
-### Core Strengths
-1. **Tactical Excellence** - Never misses immediate threats or wins
-2. **Opening Theory** - Built-in opening book with proven variations
-3. **Deep Search** - Advanced pruning allows 5-7 ply search in time limits
-4. **Pattern Recognition** - Professional threat detection and evaluation
-5. **Robustness** - Extensive validation prevents illegal moves
 
 ## 🏗️ Architecture Overview
 
@@ -74,14 +64,14 @@ exit          # Quit
 pip install pyinstaller
 
 # Build standalone executable
-pyinstaller --onefile game_engine.py
+pyinstaller --onefile --name ecojmb game_engine.py
 
 # Run
-./dist/game_engine     # Linux/Mac
-dist\game_engine.exe   # Windows
+./dist/ecojmb     # Linux/Mac
+dist\ecojmb.exe   # Windows
 ```
 
-## 🎮 Playing Against Cloudict
+## 🎮 Playing Against Other Engines
 
 ### Configuration
 For competitive play, use these settings:
@@ -96,23 +86,6 @@ self.m_time_limit = 5.0     # 5 seconds per move
 # Medium CPU: depth=5, time=5.0
 # Slow CPU: depth=4, time=4.0
 ```
-
-### Strategy Against Strong Opponents
-
-1. **Opening Phase (Moves 1-6)**
-   - Engine uses opening book automatically
-   - Plays proven variations
-   - No wasted time on opening theory
-
-2. **Middle Game (Moves 7-20)**
-   - Deep tactical search finds threats
-   - Pattern recognition guides evaluation
-   - Prioritizes defense when needed
-
-3. **Endgame (Moves 20+)**
-   - Increased search depth
-   - Tactical extensions in critical positions
-   - Transposition table speeds up analysis
 
 ## 🔧 Advanced Features
 
@@ -151,10 +124,7 @@ transposition_table = TranspositionTable(max_size=1000000)
 - OPEN_THREE (strong threat)
 - Formations (2x2, diamond, bridge)
 
-# Get threat analysis:
-threat_info = evaluator.get_threat_analysis(board, color)
-print(f"Critical level: {threat_info['critical_situation']}")
-```
+
 
 ### 4. Search Optimizations
 
@@ -281,38 +251,6 @@ self.use_null_move = False
 self.use_lmr = False
 ```
 
-### If Engine is Missing Tactics
-```python
-# Increase threat weights
-'threat_5': 10000000  # Was 5000000
-'threat_4': 1000000   # Was 500000
-
-# Extend tactical search deeper
-return self._quiescence_search(alpha, beta, color, 4)  # Was 3
-
-# Increase move candidates in critical positions
-if threat_info['critical_situation']:
-    max_moves=50  # Was 35
-```
-
-### If Engine Plays Too Defensively
-```python
-# In evaluation.py, reduce opponent penalty:
-total = (our_score) - (opponent_score) * 1.2  # Was 1.5
-
-# Increase attacking move scores
-for move_info in our_critical[:30]:  # Was [:20]
-```
-
-### If Engine Plays Too Aggressively
-```python
-# Increase opponent threat weight
-total = (our_score) - (opponent_score) * 2.0  # Was 1.5
-
-# Prioritize blocking more
-opp_critical = self.evaluator.detect_critical_moves(board, opponent)
-# Process these first before our attacks
-```
 
 ## 🐛 Debugging
 
@@ -371,15 +309,6 @@ TT: 45,678 entries, 72.3% hit rate
   - |score| > 5M = Forced win/loss
 
 
-
-## 🎓 Learning Resources
-
-### Understanding the Code
-1. Start with `game_engine.py` - Main loop
-2. Read `search_engine.py` - Core algorithm
-3. Study `evaluation.py` - How positions are scored
-4. Explore `pattern_recognition.py` - Tactical patterns
-
 ### Key Algorithms
 - **Alpha-Beta Pruning**: Core search algorithm
 - **Iterative Deepening**: Progressive depth increase
@@ -388,12 +317,6 @@ TT: 45,678 entries, 72.3% hit rate
 - **Null-Move Pruning**: Fast position evaluation
 - **Late Move Reductions**: Selective depth reduction
 
-### Further Optimization Ideas
-1. **Neural Network Evaluation** - Replace pattern recognition
-2. **Monte Carlo Tree Search** - Alternative to alpha-beta
-3. **Endgame Tablebase** - Perfect play in simple positions
-4. **Parallel Search** - Multi-threaded tree search
-5. **Time Management** - Adaptive time allocation
 
 ## 📝 License & Credits
 
@@ -414,7 +337,7 @@ If the engine crashes or behaves unexpectedly:
 2. Verify Python version (3.7+)
 3. Run test suite
 4. Check console for error messages
-5. Review log file (tia-engine.log)
+5. Review log file (ecojmb-engine.log)
 
 ## 🎉 Final Notes
 
