@@ -10,7 +10,7 @@ Perfect for testing without any cloud setup:
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/yourusername/smart-streaming-analysis.git
+git clone https://github.com/fortem751/Project-ML.git
 cd smart-streaming-analysis
 pip install ultralytics opencv-python pandas numpy matplotlib
 
@@ -32,7 +32,7 @@ For distributed processing:
 # 1. Deploy on Azure VM
 # (Create a VM in Azure Portal first)
 ssh your-vm-username@your-vm-ip
-git clone https://github.com/yourusername/smart-streaming-analysis.git
+git https://github.com/fortem751/Project-ML.git
 cd smart-streaming-analysis
 pip install -r requirements.txt
 python server.py
@@ -68,7 +68,7 @@ Best performance with cost optimization:
 ```bash
 # 1. Deploy on Azure VM
 ssh your-vm-username@your-vm-ip
-git clone https://github.com/yourusername/smart-streaming-analysis.git
+git clone https://github.com/fortem751/Project-ML.git
 cd smart-streaming-analysis
 pip install -r requirements.txt
 python advanced_yolo_server.py
@@ -217,12 +217,6 @@ Once you have the basic system running:
 3. **Review performance metrics** using the analysis scripts
 4. **Deploy to production** following security best practices
 
-## 🆘 Need Help?
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/smart-streaming-analysis/issues)
-- **Documentation**: [README.md](README.md)
-- **Examples**: See code comments in each Python file
-
 ## ⚡ Pro Tips
 
 1. **Start simple**: Begin with local processing before moving to cloud
@@ -233,4 +227,3 @@ Once you have the basic system running:
 
 ---
 
-**Ready to dive deeper?** Check out the [full documentation](README.md)!

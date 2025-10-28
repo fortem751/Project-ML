@@ -200,34 +200,6 @@ self.use_null_move = False
 self.use_lmr = False
 ```
 
-
-## 🐛 Debugging
-
-### Enable Debug Output
-```python
-# In search_engine.py, add prints:
-print(f"Depth {depth}: alpha={alpha}, beta={beta}")
-print(f"Move: {move2msg(move)}, Score: {score}")
-print(f"TT Hit: {tt_hit}, Score: {tt_score}")
-```
-
-### Check Move Validity
-```python
-# In game_engine.py, after search:
-print(f"Move validity check:")
-print(f"Pos1: ({best_move.positions[0].x}, {best_move.positions[0].y})")
-print(f"Pos2: ({best_move.positions[1].x}, {best_move.positions[1].y})")
-print(f"Board[pos1]: {self.m_board[best_move.positions[0].x][best_move.positions[0].y]}")
-```
-
-### Verify Search Depth
-```python
-# Check nodes per depth
-for d in range(max_depth):
-    if self.nodes_per_depth[d] > 0:
-        print(f"Depth {d}: {self.nodes_per_depth[d]} nodes")
-```
-
 ## 📈 Performance Monitoring
 
 ### Real-Time Statistics
