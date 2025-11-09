@@ -1,7 +1,4 @@
-"""
-Professional Search Engine for Connect 6
-Includes: Alpha-Beta, Null-Move, LMR, Aspiration Windows, PVS
-"""
+
 
 from defines import *
 from tools import make_move, unmake_move, is_win_by_premove
@@ -13,7 +10,6 @@ import time
 
 
 class SearchEngine:
-    """Professional game tree search engine."""
 
     def __init__(self):
         self.m_board = None
@@ -51,7 +47,7 @@ class SearchEngine:
         self.move_number = 0  # Track move number for opening book
 
     def before_search(self, board, color, alphabeta_depth):
-        """Initialize search."""
+
         self.m_board = [row[:] for row in board]
         self.m_chess_type = color
         self.m_alphabeta_depth = alphabeta_depth
@@ -74,10 +70,7 @@ class SearchEngine:
         self.cutoffs_other_moves = 0
 
     def iterative_deepening_search(self, max_depth, time_limit, our_color, best_move):
-        """
-        Iterative deepening with aspiration windows.
-        Professional implementation with all optimizations.
-        """
+
         self.max_time = time_limit
         self.start_time = time.perf_counter()
 
@@ -190,7 +183,7 @@ class SearchEngine:
         return best_score
 
     def _alpha_beta_root(self, depth, alpha, beta, color, best_move):
-        """Root search with PV handling."""
+
         self.m_total_nodes += 1
         self.nodes_per_depth[depth] += 1
 
@@ -252,15 +245,9 @@ class SearchEngine:
 
         return best_score
 
+    # Alpha-beta search with all optimizations
     def _alpha_beta(self, depth, alpha, beta, color, best_move, pre_move):
-        """
-        Main alpha-beta search with all optimizations:
-        - Transposition table
-        - Null-move pruning
-        - Late move reductions
-        - Killer move ordering
-        - Tactical extensions
-        """
+
         # Periodic time check (every 100 nodes)
         self.time_check_counter += 1
         if self.time_check_counter % 100 == 0:
@@ -406,7 +393,7 @@ class SearchEngine:
         return best_score
 
     def _quiescence_search(self, alpha, beta, color, depth):
-        """Quiescence search for tactical positions."""
+
         if depth <= 0:
             return self.evaluator.evaluate_position(self.m_board, self.m_chess_type)
 
@@ -443,7 +430,7 @@ class SearchEngine:
         return alpha if color == self.m_chess_type else beta
 
     def _generate_tactical_moves(self, color):
-        """Generate captures and threats for quiescence."""
+
         moves = []
 
         # Get critical moves (threats)
@@ -465,7 +452,7 @@ class SearchEngine:
         return moves
 
     def _order_moves(self, moves, depth, pv_move):
-        """Order moves for better pruning."""
+
         if not moves:
             return moves
 
@@ -491,14 +478,14 @@ class SearchEngine:
         return moves
 
     def _update_killers(self, move, depth):
-        """Update killer move heuristic."""
+
         if depth < len(self.killer_moves):
             if not self._moves_equal(move, self.killer_moves[depth][0]):
                 self.killer_moves[depth][1] = self.killer_moves[depth][0]
                 self.killer_moves[depth][0] = self._copy_move(move)
 
     def _moves_equal(self, move1, move2):
-        """Check if two moves are equal."""
+
         if move1 is None or move2 is None:
             return False
         return (move1.positions[0].x == move2.positions[0].x and
@@ -507,7 +494,7 @@ class SearchEngine:
                 move1.positions[1].y == move2.positions[1].y)
 
     def _copy_move(self, move):
-        """Create a copy of a move."""
+
         new_move = StoneMove()
         new_move.positions[0].x = move.positions[0].x
         new_move.positions[0].y = move.positions[0].y
@@ -517,17 +504,17 @@ class SearchEngine:
         return new_move
 
     def _validate_move(self, move):
-        """Ensure move has valid coordinates."""
+
         for pos in move.positions:
             pos.x = max(1, min(19, pos.x))
             pos.y = max(1, min(19, pos.y))
 
     def _hash_board(self):
-        """Simple board hash for now."""
+
         return hash(tuple(tuple(row) for row in self.m_board))
 
     def _find_second_stone(self, pos1, board):
-        """Find good position for second stone."""
+
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
                 x2, y2 = pos1[0] + dx, pos1[1] + dy

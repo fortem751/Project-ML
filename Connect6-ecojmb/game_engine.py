@@ -1,6 +1,5 @@
 """
-Professional Game Engine for Connect 6
-Integrates all advanced components
+ Main Game Engine - 
 """
 
 from defines import *
@@ -18,7 +17,6 @@ def flush_output():
 
 
 class GameEngine:
-    """Professional Connect 6 game engine."""
 
     def __init__(self, name=Defines.ENGINE_NAME):
         if name and len(name) > 0:
@@ -41,7 +39,7 @@ class GameEngine:
         self.move_count = 0
 
     def on_help(self):
-        print(f"=== {self.m_engine_name} - Professional Connect 6 Engine ===")
+        print(f"=== {self.m_engine_name} -  ecojmb ===")
         print("Commands:")
         print("  name          - Print engine name")
         print("  print         - Print current board")
@@ -94,11 +92,9 @@ class GameEngine:
             move.positions[1].x, move.positions[1].y = x, y
         return move
 
+    # This function defines the main game loop
     def run(self):
-        """Main game loop."""
-        print(f"\n{self.m_engine_name} - Professional Edition")
-        print("Using: Opening Book, Zobrist Hashing, Pattern Recognition")
-        print("Advanced: Null-Move, LMR, Aspiration Windows, PVS")
+        print(f"\n{self.m_engine_name} - ecojmb ")
         print("=" * 60)
         self.on_help()
 
@@ -192,7 +188,7 @@ class GameEngine:
                             if depth_value <= 2:
                                 self.m_alphabeta_depth = 4
                             elif depth_value <= 4:
-                                self.m_alphabeta_depth = 6  # PATCHED: Increased from 5
+                                self.m_alphabeta_depth = 6
                             elif depth_value <= 8:
                                 self.m_alphabeta_depth = 6
                             else:
@@ -229,8 +225,9 @@ class GameEngine:
 
         return 0
 
+    # Search and return best move
     def search_a_move(self, our_color, best_move):
-        """Execute search and return best move."""
+
         try:
             print(f"\n--- Move {self.move_count} Search ---")
             start = time.perf_counter()

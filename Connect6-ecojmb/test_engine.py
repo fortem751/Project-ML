@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-"""
-Comprehensive Test Suite for Professional Connect 6 Engine
-Tests all major components and functionality
-"""
+
+# Programs to test all components and functionality
 
 import sys
 from defines import *
@@ -16,7 +14,6 @@ from zobrist_hash import ZobristHash, TranspositionTable
 
 
 class TestSuite:
-    """Complete test suite for the engine."""
 
     def __init__(self):
         self.passed = 0
@@ -24,7 +21,7 @@ class TestSuite:
         self.tests_run = 0
 
     def test(self, name, condition, error_msg=""):
-        """Run a single test."""
+
         self.tests_run += 1
         if condition:
             print(f"✓ {name}")
@@ -38,7 +35,7 @@ class TestSuite:
             return False
 
     def section(self, name):
-        """Print section header."""
+
         print(f"\n{'='*60}")
         print(f"{name}")
         print('='*60)
@@ -62,7 +59,7 @@ class TestSuite:
 
 
 def test_pattern_recognition():
-    """Test pattern recognition system."""
+
     suite = TestSuite()
     suite.section("Pattern Recognition Tests")
 
@@ -134,7 +131,7 @@ def test_pattern_recognition():
 
 
 def test_evaluation():
-    """Test evaluation function."""
+
     suite = TestSuite()
     suite.section("Evaluation Function Tests")
 
@@ -204,7 +201,7 @@ def test_evaluation():
 
 
 def test_move_generator():
-    """Test move generation."""
+
     suite = TestSuite()
     suite.section("Move Generator Tests")
 
@@ -298,7 +295,7 @@ def test_move_generator():
 
 
 def test_zobrist_hash():
-    """Test Zobrist hashing."""
+
     suite = TestSuite()
     suite.section("Zobrist Hash & Transposition Table Tests")
 
@@ -368,7 +365,6 @@ def test_zobrist_hash():
 
 
 def test_opening_book():
-    """Test opening book."""
     suite = TestSuite()
     suite.section("Opening Book Tests")
 
@@ -409,7 +405,7 @@ def test_opening_book():
 
 
 def test_search_engine():
-    """Test search engine."""
+
     suite = TestSuite()
     suite.section("Search Engine Tests")
 
@@ -509,7 +505,7 @@ def test_search_engine():
 
 
 def test_integration():
-    """Integration tests."""
+
     suite = TestSuite()
     suite.section("Integration Tests")
 
@@ -567,7 +563,7 @@ def test_integration():
 def main():
     """Run all tests."""
     print("="*60)
-    print("PROFESSIONAL CONNECT 6 ENGINE - TEST SUITE")
+    print("Testing Connect6 Functionality")
     print("="*60)
 
     all_suites = []
@@ -596,15 +592,15 @@ def main():
     print("="*60)
 
     if total_failed == 0:
-        print("\n✓✓✓ ALL TESTS PASSED ✓✓✓")
+        print("\n ALL TESTS PASSED ")
         print("\nThe engine is ready for competitive play!")
         print("You can now:")
         print("  1. Build with: pyinstaller --onefile game_engine.py")
-        print("  2. Test against Cloudict")
+        print("  2. Test against other engines like Cloudict")
         print("  3. Analyze games and improve")
         return 0
     else:
-        print(f"\n✗✗✗ {total_failed} TESTS FAILED ✗✗✗")
+        print(f"\n {total_failed} TESTS FAILED ")
         print("\nPlease fix the errors above before playing.")
         return 1
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """
-Apply emergency defensive patches to make engine harder to beat
-Run this script to automatically apply all patches
+Run this script to apply patches to make the engine harder to beat automatically apply all patches
 """
 
 import os
@@ -153,7 +152,7 @@ def verify_patches():
 
 def main():
     print("="*60)
-    print("EMERGENCY DEFENSIVE PATCH APPLICATION")
+    print("DEFENSIVE PATCH")
     print("="*60)
     print("\nThis will make the engine much more defensive:")
     print("  - 5x increase in open four threat weight")
@@ -193,7 +192,7 @@ def main():
                 print(f"  - {error}")
         else:
             print("\n" + "="*60)
-            print("✓✓✓ ALL PATCHES APPLIED SUCCESSFULLY ✓✓✓")
+            print("ALL PATCHES APPLIED SUCCESSFULLY ")
             print("="*60)
             print("\nNext steps:")
             print("1. Rebuild: pyinstaller --onefile game_engine.py")
@@ -204,7 +203,7 @@ def main():
             print("  - Much more defensive play")
             print("  - Never misses critical threats")
     else:
-        print("\n✗ Some patches failed. Check error messages above.")
+        print("\n Some patches failed. Check error messages above.")
 
     print("\nTo restore original files, rename .backup files")
 

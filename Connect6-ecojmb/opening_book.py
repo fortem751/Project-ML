@@ -1,29 +1,19 @@
-"""
-Professional Opening Book System for Connect 6
-Based on analysis of strong games and strategic principles
-"""
+
 
 from defines import *
 import random
 
+# Opening book using Joseki-like patterns
+
 
 class OpeningBook:
-    """
-    Opening book based on established Connect 6 theory.
-    Uses Joseki-like patterns and proven strong sequences.
-    """
 
     def __init__(self):
         self.book = self._initialize_book()
         self.variation_played = {}  # Track what we've played
 
     def _initialize_book(self):
-        """
-        Initialize opening book with strong variations.
 
-        Format: position_hash -> list of good moves
-        Each move is (pos1, pos2, score, comment)
-        """
         book = {}
 
         # ===== BLACK'S FIRST MOVE (SINGLE STONE) =====
@@ -82,22 +72,16 @@ class OpeningBook:
         }
 
         return book
+    # Create a simple hash of stone positions
 
     def _hash_position(self, stones):
-        """
-        Create a simple hash of stone positions.
-        stones = list of (x, y, color) tuples
-        """
+
         # Sort by position for consistency
         sorted_stones = sorted(stones, key=lambda s: (s[0], s[1], s[2]))
         return str(sorted_stones)
 
     def get_book_move(self, board, color, move_number):
-        """
-        Query opening book for move.
 
-        Returns: (pos1, pos2, in_book) or (None, None, False)
-        """
         # Only use book in opening
         if move_number > self.opening_principles['max_opening_moves']:
             return None, None, False
@@ -134,7 +118,7 @@ class OpeningBook:
 
             # Pick top move with some randomization
             if len(move_scores) > 0:
-                # 80% play best, 20% play second best
+
                 if len(move_scores) > 1 and random.random() < 0.2:
                     chosen = move_scores[1]
                 else:
@@ -142,21 +126,19 @@ class OpeningBook:
 
                 idx, _, pos1, pos2 = chosen
 
-                # Record that we played this
                 key = pos_hash + str(idx)
                 self.variation_played[key] = self.variation_played.get(
                     key, 0) + 1
 
                 return pos1, pos2, True
 
-        # Not in book, but maybe we can use opening principles
         if move_number <= 4:
             return self._generate_principle_move(board, color)
 
         return None, None, False
 
     def _is_empty_board(self, board):
-        """Check if board is empty."""
+
         for i in range(1, 20):
             for j in range(1, 20):
                 if board[i][j] != Defines.NOSTONE:
@@ -164,7 +146,7 @@ class OpeningBook:
         return True
 
     def _extract_stones(self, board):
-        """Extract all stones from board as list of (x, y, color)."""
+
         stones = []
         for i in range(1, 20):
             for j in range(1, 20):
@@ -173,9 +155,7 @@ class OpeningBook:
         return stones
 
     def _generate_principle_move(self, board, color):
-        """
-        Generate move based on opening principles when not in book.
-        """
+
         # Find existing stones
         our_stones = []
         opp_stones = []
@@ -258,23 +238,15 @@ class OpeningBook:
         return None, None, False
 
     def add_position(self, board, move, result):
-        """
-        Learn from game results (for future ML integration).
 
-        board: position before move
-        move: move played (pos1, pos2)
-        result: outcome (1=win, 0=draw, -1=loss)
-        """
         # Extract position hash
         stones = self._extract_stones(board)
         pos_hash = self._hash_position(stones)
 
-        # Could store this in a database for learning
-        # For now, just track in memory
         pass
 
     def save_book(self, filename='opening_book.json'):
-        """Save opening book to file."""
+
         import json
 
         # Convert book to JSON-serializable format

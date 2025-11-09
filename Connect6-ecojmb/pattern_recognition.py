@@ -1,7 +1,4 @@
-"""
-Professional Pattern Recognition for Connect 6
-Includes threat space search and tactical pattern database
-"""
+
 
 from defines import *
 from collections import defaultdict
@@ -11,13 +8,7 @@ class ThreatPattern:
     """Represents a threat pattern in Connect 6."""
 
     def __init__(self, pattern_type, positions, threat_level, win_positions):
-        """
-        Args:
-            pattern_type: Type of threat (e.g., "OPEN_FOUR", "STRAIGHT_FOUR")
-            positions: List of (x, y) occupied positions
-            threat_level: Urgency (0-5, where 5 is immediate win)
-            win_positions: List of (x, y) positions that complete the threat
-        """
+
         self.pattern_type = pattern_type
         self.positions = positions
         self.threat_level = threat_level
@@ -25,10 +16,6 @@ class ThreatPattern:
 
 
 class PatternRecognizer:
-    """
-    Professional pattern recognition system.
-    Detects tactical patterns, threats, and formations.
-    """
 
     def __init__(self):
         # Pattern weights for evaluation
@@ -66,18 +53,7 @@ class PatternRecognizer:
         self.directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
 
     def analyze_position(self, board, color):
-        """
-        Deep analysis of position for given color.
 
-        Returns:
-            {
-                'threats': [ThreatPattern],
-                'score': int,
-                'critical_level': int (0-5),
-                'winning_moves': [(x, y)],
-                'defensive_moves': [(x, y)]
-            }
-        """
         threats = []
         winning_moves = []
         defensive_moves = []
@@ -117,10 +93,7 @@ class PatternRecognizer:
         }
 
     def _analyze_line(self, board, x, y, direction, color):
-        """
-        Analyze a line starting from (x, y) in given direction.
-        Returns ThreatPattern if found, None otherwise.
-        """
+
         dx, dy = direction
 
         # Count consecutive stones
@@ -189,11 +162,7 @@ class PatternRecognizer:
         return None
 
     def _classify_threat(self, length, before_open, after_open):
-        """
-        Classify threat based on length and openness.
 
-        Returns: (pattern_type, threat_level)
-        """
         both_open = before_open and after_open
         one_open = before_open or after_open
 
@@ -230,10 +199,7 @@ class PatternRecognizer:
         return None, 0
 
     def find_threat_combinations(self, board, color):
-        """
-        Find combinations of threats (double threats, etc.).
-        These are often game-winning.
-        """
+
         analysis = self.analyze_position(board, color)
         threats = analysis['threats']
 
@@ -289,9 +255,7 @@ class PatternRecognizer:
         return combinations
 
     def detect_formations(self, board, color):
-        """
-        Detect special formations (square, diamond, bridge, etc.).
-        """
+
         formations = []
 
         # Check for 2x2 squares
@@ -326,9 +290,7 @@ class PatternRecognizer:
         return formations
 
     def evaluate_tactical_score(self, board, color):
-        """
-        Complete tactical evaluation using pattern recognition.
-        """
+
         # Our threats
         our_analysis = self.analyze_position(board, color)
         our_combinations = self.find_threat_combinations(board, color)
@@ -347,7 +309,6 @@ class PatternRecognizer:
         opp_score = opp_analysis['score']
         opp_score += sum(c['score'] for c in opp_combinations)
 
-        # Weight opponent threats more heavily (defensive play)
         total = our_score - opp_score * 3.0
 
         return int(total), our_analysis, opp_analysis

@@ -149,7 +149,7 @@ except Exception as e:
     sys.exit(1)
 
 print("\n" + "="*60)
-print("✓ ALL BASIC TESTS PASSED")
+print(" ALL BASIC TESTS PASSED")
 print("="*60)
 print("\nIf this passed but full test hangs, the issue is in deeper search.")
 print("Try reducing search depth in full tests.")

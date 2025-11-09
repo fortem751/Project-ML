@@ -1,22 +1,18 @@
-"""
-Professional Evaluation Function for Connect 6
-Integrates pattern recognition, threat analysis, and positional understanding
-"""
+
 
 from defines import *
 from pattern_recognition import PatternRecognizer
 
 
 class Evaluator:
-    """Professional-grade position evaluator."""
 
     def __init__(self):
         # Initialize pattern recognizer
         self.pattern_recognizer = PatternRecognizer()
 
-        # Core evaluation weights (refined through testing)
+        # Core evaluation weights
         self.weights = {
-            # Material/Tactical (most important)
+            # Material/Tactical
             'win': 10000000,
             'pattern_score': 1.0,      # Use pattern recognizer scores directly
 
@@ -37,10 +33,7 @@ class Evaluator:
         self.cache_misses = 0
 
     def evaluate_position(self, board, color):
-        """
-        Master evaluation function.
-        Combines tactical, positional, and strategic factors.
-        """
+
         # Check for immediate game-ending positions first
         if self._is_won(board, color):
             return Defines.MAXINT - 1
@@ -63,7 +56,6 @@ class Evaluator:
         # Combine scores
         total = tactical_score + positional_score + strategic_score
 
-        # Bonus for having the initiative (higher critical level)
         if our_analysis['critical_level'] > opp_analysis['critical_level']:
             total += 5000 * \
                 (our_analysis['critical_level'] -
@@ -101,13 +93,7 @@ class Evaluator:
         return False
 
     def _evaluate_positional(self, board, color):
-        """
-        Evaluate positional factors:
-        - Center control
-        - Mobility
-        - Connectivity
-        - Influence
-        """
+
         score = 0
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.WHITE
 
@@ -162,10 +148,7 @@ class Evaluator:
         return count
 
     def _count_connectivity(self, board, color):
-        """
-        Count connections between stones.
-        Stones within distance 2 are considered connected.
-        """
+
         stones = []
         for x in range(1, 20):
             for y in range(1, 20):
@@ -182,10 +165,7 @@ class Evaluator:
         return connections
 
     def _calculate_influence(self, board, color):
-        """
-        Calculate influence/territorial control.
-        Each stone radiates influence to nearby squares.
-        """
+
         influence_map = [[0] * 21 for _ in range(21)]
 
         for x in range(1, 20):
@@ -210,11 +190,7 @@ class Evaluator:
         return total_influence
 
     def _evaluate_strategic(self, board, color, our_analysis, opp_analysis):
-        """
-        Evaluate strategic factors:
-        - Tempo (who is attacking)
-        - Development (number of active stones)
-        """
+
         score = 0
 
         # Tempo: reward for having more/better threats
@@ -222,7 +198,7 @@ class Evaluator:
             our_analysis['threats']) - len(opp_analysis['threats'])
         score += threat_advantage * self.weights['tempo']
 
-        # Development: number of stones involved in threats
+        # Number of stones involved in threats
         our_development = len(set(
             pos for threat in our_analysis['threats']
             for pos in threat.positions
@@ -241,20 +217,17 @@ class Evaluator:
     # ===== Tactical Analysis Methods =====
 
     def detect_immediate_win(self, board, color):
-        """Find all winning moves (places 6th stone)."""
+
         analysis = self.pattern_recognizer.analyze_position(board, color)
         return analysis['winning_moves']
 
     def detect_immediate_threat(self, board, color):
-        """Detect if opponent can win."""
+
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.WHITE
         return self.detect_immediate_win(board, opponent)
 
     def detect_critical_moves(self, board, color):
-        """
-        Find moves that create critical threats (fours, open threes).
-        Returns list of (position, threat_level, score).
-        """
+
         critical_moves = []
 
         for x in range(1, 20):
@@ -283,9 +256,7 @@ class Evaluator:
         return critical_moves
 
     def find_forcing_moves(self, board, color):
-        """
-        Find forcing moves (moves opponent must respond to).
-        """
+
         forcing = []
 
         critical = self.detect_critical_moves(board, color)
@@ -298,10 +269,7 @@ class Evaluator:
         return forcing
 
     def get_threat_analysis(self, board, color):
-        """
-        Complete threat analysis for a position.
-        Returns detailed information about all threats.
-        """
+
         our_analysis = self.pattern_recognizer.analyze_position(board, color)
 
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.WHITE
@@ -325,13 +293,13 @@ class Evaluator:
         }
 
     def clear_cache(self):
-        """Clear evaluation cache."""
+
         self.eval_cache.clear()
         self.cache_hits = 0
         self.cache_misses = 0
 
     def get_cache_stats(self):
-        """Get cache statistics."""
+
         total = self.cache_hits + self.cache_misses
         hit_rate = self.cache_hits / total if total > 0 else 0
 

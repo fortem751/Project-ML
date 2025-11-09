@@ -1,33 +1,17 @@
-"""
-Professional Move Generator for Connect 6
-Advanced move ordering and candidate selection
-"""
+
 
 from defines import *
 from evaluation import Evaluator
 
 
 class MoveGenerator:
-    """Professional move generator with intelligent pruning."""
 
     def __init__(self):
         self.evaluator = Evaluator()
         self.move_history = {}  # Track successful moves
 
     def generate_moves(self, board, color, depth, max_moves=40, pv_move=None):
-        """
-        Generate ordered list of candidate moves.
 
-        Args:
-            board: Current board state
-            color: Color to move
-            depth: Current search depth
-            max_moves: Maximum moves to return
-            pv_move: Principal variation move (best from last search)
-
-        Returns:
-            List of StoneMove objects, ordered by estimated strength
-        """
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.WHITE
 
         # PRIORITY 0: PV move from transposition table (try first)
@@ -63,7 +47,7 @@ class MoveGenerator:
         return self._generate_standard_moves(board, color, depth, max_moves)
 
     def _create_winning_moves(self, win_positions, board, color):
-        """Create moves that win immediately."""
+
         moves = []
 
         # If multiple wins, use both stones to win
@@ -106,7 +90,7 @@ class MoveGenerator:
         return moves if moves else [self._create_center_move()]
 
     def _create_desperate_defense(self, threat_positions, board, color):
-        """Try to block multiple threats."""
+
         if len(threat_positions) >= 2:
             move = StoneMove()
             move.positions[0].x, move.positions[0].y = threat_positions[0]
@@ -116,7 +100,7 @@ class MoveGenerator:
         return [self._create_center_move()]
 
     def _create_defensive_counterattack(self, threat_pos, board, color, max_moves):
-        """Block threat and counterattack."""
+
         moves = []
 
         # Find our best attacking moves
@@ -139,13 +123,13 @@ class MoveGenerator:
         return moves[:max_moves] if moves else [self._create_center_move()]
 
     def _generate_critical_moves(self, board, color, threat_info, max_moves):
-        """Generate moves in critical tactical positions."""
+
         moves = []
 
-        # Get our critical moves
+        # Get critical moves
         our_critical = self.evaluator.detect_critical_moves(board, color)
 
-        # Get opponent's critical moves (we might need to block)
+        # Get opponent's critical moves
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.opponent
         opp_critical = self.evaluator.detect_critical_moves(board, opponent)
 
@@ -196,7 +180,7 @@ class MoveGenerator:
         )
 
     def _generate_standard_moves(self, board, color, depth, max_moves):
-        """Generate moves using standard heuristics."""
+
         candidate_positions = []
         positions_checked = 0
         max_checks = 400  # Safety limit
@@ -287,7 +271,7 @@ class MoveGenerator:
         return moves[:max_moves] if moves else [self._create_center_move()]
 
     def _quick_eval_position(self, board, x, y, color):
-        """Quick heuristic evaluation of a position."""
+
         score = 0
 
         # Temporarily place stone
@@ -313,8 +297,6 @@ class MoveGenerator:
 
         board[x][y] = Defines.NOSTONE
 
-        # Positional factors
-        # Center bonus
         center_dist = abs(x - 10) + abs(y - 10)
         score += (20 - center_dist) * 3
 
@@ -334,7 +316,7 @@ class MoveGenerator:
         return score
 
     def _count_line_length(self, board, x, y, dx, dy, color):
-        """Count consecutive stones in direction."""
+
         count = 1
 
         # Forward
@@ -354,7 +336,7 @@ class MoveGenerator:
         return count
 
     def _create_center_move(self):
-        """Fallback center move."""
+
         move = StoneMove()
         move.positions[0].x = 10
         move.positions[0].y = 10
@@ -364,7 +346,7 @@ class MoveGenerator:
         return move
 
     def update_history(self, move, depth, caused_cutoff):
-        """Update move history for better ordering."""
+
         if caused_cutoff:
             move_key = (
                 (move.positions[0].x, move.positions[0].y),
@@ -377,5 +359,5 @@ class MoveGenerator:
             self.move_history[move_key] += depth * depth
 
     def clear_history(self):
-        """Clear move history."""
+
         self.move_history.clear()

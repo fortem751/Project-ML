@@ -25,6 +25,6 @@ print(f"Expected: (10,15) or (10,9)")
 blocks = (pos1 == (10, 15) or pos1 == (10, 9)
           or pos2 == (10, 15) or pos2 == (10, 9))
 if blocks:
-    print("✓ BLOCKS CORRECTLY!")
+    print(" BLOCKS CORRECTLY!")
 else:
-    print("✗ FAILED TO BLOCK!")
+    print(" FAILED TO BLOCK!")
