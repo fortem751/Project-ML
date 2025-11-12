@@ -1,14 +1,13 @@
 #!/usr/bin/env python
-"""
-Run this script to apply patches to make the engine harder to beat automatically apply all patches
-"""
+
+# Run this script to automatically apply patches to make the engine harder to beat
+
 
 import os
 import re
 
 
 def backup_file(filename):
-    """Create backup of file before modifying."""
     if os.path.exists(filename):
         backup = filename + ".backup"
         with open(filename, 'r') as f:
@@ -23,7 +22,6 @@ def backup_file(filename):
 
 
 def apply_pattern_recognition_patches():
-    """Increase threat weights in pattern_recognition.py"""
     filename = "pattern_recognition.py"
 
     if not backup_file(filename):
@@ -63,12 +61,12 @@ def apply_pattern_recognition_patches():
     with open(filename, 'w') as f:
         f.write(content)
 
-    print(f"✓ Patched {filename}")
+    print(f" Patched {filename}")
     return True
 
 
 def apply_game_engine_patches():
-    """Increase search depth and time in game_engine.py"""
+
     filename = "game_engine.py"
 
     if not backup_file(filename):
@@ -99,7 +97,6 @@ def apply_game_engine_patches():
 
 
 def verify_patches():
-    """Verify patches were applied correctly."""
     print("\n" + "="*60)
     print("VERIFYING PATCHES")
     print("="*60)
@@ -112,17 +109,17 @@ def verify_patches():
             content = f.read()
 
         if "'OPEN_FOUR': 5000000" in content:
-            print("✓ OPEN_FOUR weight increased")
+            print(" OPEN_FOUR weight increased")
         else:
             errors.append("OPEN_FOUR weight not increased")
 
         if "'STRAIGHT_FOUR': 2000000" in content:
-            print("✓ STRAIGHT_FOUR weight increased")
+            print(" STRAIGHT_FOUR weight increased")
         else:
             errors.append("STRAIGHT_FOUR weight not increased")
 
         if "opp_score * 3.0" in content:
-            print("✓ Opponent penalty increased")
+            print(" Opponent penalty increased")
         else:
             errors.append("Opponent penalty not increased")
 
@@ -135,12 +132,12 @@ def verify_patches():
             content = f.read()
 
         if "m_alphabeta_depth = 6" in content:
-            print("✓ Search depth increased")
+            print(" Search depth increased")
         else:
             errors.append("Search depth not increased")
 
         if "m_time_limit = 8.0" in content:
-            print("✓ Time limit increased")
+            print(" Time limit increased")
         else:
             errors.append("Time limit not increased")
 
@@ -154,7 +151,7 @@ def main():
     print("="*60)
     print("DEFENSIVE PATCH")
     print("="*60)
-    print("\nThis will make the engine much more defensive:")
+    print("\nThis patch makes the  engine much more defensive:")
     print("  - 5x increase in open four threat weight")
     print("  - 4x increase in straight four threat weight")
     print("  - 4x increase in open three threat weight")
@@ -187,7 +184,7 @@ def main():
         errors = verify_patches()
 
         if errors:
-            print("\n⚠️  WARNINGS:")
+            print("\n  WARNINGS:")
             for error in errors:
                 print(f"  - {error}")
         else:
@@ -199,9 +196,7 @@ def main():
             print("2. Test: python quick_test.py")
             print("3. Play against Cloudict again")
             print("\nExpected improvement:")
-            print("  - Engine should survive past move 10")
-            print("  - Much more defensive play")
-            print("  - Never misses critical threats")
+            print("  - Engine should be more defensive with strong engines like Cloudict")
     else:
         print("\n Some patches failed. Check error messages above.")
 
