@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ### Clone Repository
 
 ```bash
-git clone https://github.com/fortem751/Project-ML/tree/main/Wumpus World
+git clone git clone https://github.com/fortem751/Project-ML.git
 cd Wumpus World
 ```
 

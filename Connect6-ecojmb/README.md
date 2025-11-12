@@ -16,6 +16,12 @@ search_engine.py (Search with all optimizations)
 ```
 
 ### Installation
+### Clone Repository
+
+```bash
+git clone git clone https://github.com/fortem751/Project-ML.git
+cd Connect6
+
 ```bash
 
 #  Python 3.7+ - Required
