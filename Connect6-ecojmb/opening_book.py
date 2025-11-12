@@ -16,14 +16,13 @@ class OpeningBook:
 
         book = {}
 
-        # ===== BLACK'S FIRST MOVE (SINGLE STONE) =====
-        # Tengen (center) is standard - we always play this
+        # BLACK'S first move(single stone)
+
         book['start_black'] = [
             ((10, 10), None, 100, "Tengen - standard opening")
         ]
 
-        # ===== WHITE'S FIRST RESPONSE TO TENGEN =====
-        # Key principle: Respond near but not adjacent, control space
+        #  WHITE'S first response
         tengen_hash = self._hash_position([(10, 10, Defines.BLACK)])
 
         book[tengen_hash] = [
@@ -44,8 +43,8 @@ class OpeningBook:
             ((10, 9), (10, 11), 75, "Vertical contact"),
         ]
 
-        # ===== BLACK'S SECOND MOVE AFTER STANDARD RESPONSES =====
-        # After White plays diagonal
+        # BLACK'S Second move after standard responses
+        #
         pos_after_diag = [(10, 10, Defines.BLACK),
                           (9, 9, Defines.WHITE), (11, 11, Defines.WHITE)]
         diag_hash = self._hash_position(pos_after_diag)
@@ -61,8 +60,7 @@ class OpeningBook:
             ((9, 10), (10, 9), 80, "Surround center"),
         ]
 
-        # ===== GENERAL OPENING PRINCIPLES =====
-        # These patterns can be used in various positions
+        # Openng principles
         self.opening_principles = {
             'avoid_edge': True,      # Don't play on edges in opening
             'maintain_distance': 2,  # Keep at least 2 spaces between groups
@@ -183,7 +181,6 @@ class OpeningBook:
                     nx, ny = ox + dx, oy + dy
                     if 1 <= nx <= 19 and 1 <= ny <= 19:
                         if board[nx][ny] == Defines.NOSTONE:
-                            # Score based on distance from center
                             center_dist = abs(nx - 10) + abs(ny - 10)
                             score = 50 - center_dist
                             candidates.append((nx, ny, score))
@@ -269,8 +266,8 @@ class OpeningBook:
         except Exception as e:
             print(f"Error saving opening book: {e}")
 
+     # Load opening book from file
     def load_book(self, filename='opening_book.json'):
-        """Load opening book from file."""
         import json
 
         try:

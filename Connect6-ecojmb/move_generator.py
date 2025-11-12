@@ -136,13 +136,11 @@ class MoveGenerator:
         # Combine attacking and defending
         seen = set()
 
-        # Our attacks
         for move1 in our_critical[:20]:
             pos1 = move1['position']
             if pos1 in seen:
                 continue
 
-            # Try combining with other attacks or blocks
             for move2 in our_critical[:15]:
                 pos2 = move2['position']
                 if pos2 != pos1 and pos2 not in seen:
@@ -247,7 +245,6 @@ class MoveGenerator:
                 score1 = unique_candidates[top_positions[i]]
                 score2 = unique_candidates[top_positions[j]]
 
-                # Bonus for proximity
                 dist = (abs(top_positions[i][0] - top_positions[j][0]) +
                         abs(top_positions[i][1] - top_positions[j][1]))
                 proximity_bonus = max(0, 20 - dist * 2)

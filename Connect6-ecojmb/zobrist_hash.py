@@ -55,8 +55,8 @@ class TranspositionTable:
 
     # Entry types
     EXACT = 0      # Exact score
-    LOWER_BOUND = 1  # Score is at least this (beta cutoff)
-    UPPER_BOUND = 2  # Score is at most this (alpha cutoff)
+    LOWER_BOUND = 1  # Score is at least this
+    UPPER_BOUND = 2  # Score is at most this
 
     def __init__(self, max_size=500000):
 
@@ -81,7 +81,7 @@ class TranspositionTable:
     def soft_clear(self):
 
         if len(self.table) > self.max_size * 0.8:
-            # Remove entries from old ages
+
             to_remove = []
             for key, entry in self.table.items():
                 if entry['age'] < self.current_age - 2:
@@ -94,14 +94,9 @@ class TranspositionTable:
 
     def store(self, hash_key, depth, score, flag, best_move=None, threat_level=0):
 
-        # Check if we should replace existing entry
         if hash_key in self.table:
             old_entry = self.table[hash_key]
 
-            # Always replace if:
-            # 1. New depth is greater
-            # 2. Same depth but newer age
-            # 3. Exact score vs bound
             if (depth > old_entry['depth'] or
                 (depth == old_entry['depth'] and self.current_age > old_entry['age']) or
                     (flag == self.EXACT and old_entry['flag'] != self.EXACT)):

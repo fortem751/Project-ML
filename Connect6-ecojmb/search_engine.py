@@ -270,7 +270,6 @@ class SearchEngine:
         if tt_hit:
             return tt_score
 
-        # Leaf node - evaluate or extend
         if depth <= 0:
             # Check if position is tactical (needs extension)
             threat_info = self.evaluator.get_threat_analysis(

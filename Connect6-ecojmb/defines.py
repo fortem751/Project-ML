@@ -24,8 +24,6 @@ class StoneMove:
         self.positions = [StonePosition(0, 0), StonePosition(0, 0)]
         self.score = 0
 
-# One point and its value.
-
 
 class Chess:
     def __init__(self, x=0, y=0, score=0):

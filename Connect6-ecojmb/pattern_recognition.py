@@ -5,7 +5,6 @@ from collections import defaultdict
 
 
 class ThreatPattern:
-    """Represents a threat pattern in Connect 6."""
 
     def __init__(self, pattern_type, positions, threat_level, win_positions):
 
@@ -106,7 +105,6 @@ class PatternRecognizer:
             temp_x += dx
             temp_y += dy
 
-        # Only analyze if we have at least 2 in a row
         if consecutive < 2:
             return None
 
@@ -149,7 +147,6 @@ class PatternRecognizer:
 
         # Check for extensions with gaps (e.g., OOOO or OOO_O)
         if after_open and consecutive >= 3:
-            # Check for one-gap extension
             gap_x = after_x + dx
             gap_y = after_y + dy
             if (1 <= gap_x <= 19 and 1 <= gap_y <= 19 and
@@ -208,7 +205,6 @@ class PatternRecognizer:
         # Check for double fours (two four-in-a-rows)
         fours = [t for t in threats if t.threat_level >= 4]
         if len(fours) >= 2:
-            # Check if they share winning positions (true double threat)
             winning_sets = [set(t.win_positions) for t in fours]
             shared = set.intersection(*winning_sets) if winning_sets else set()
 
@@ -291,12 +287,10 @@ class PatternRecognizer:
 
     def evaluate_tactical_score(self, board, color):
 
-        # Our threats
         our_analysis = self.analyze_position(board, color)
         our_combinations = self.find_threat_combinations(board, color)
         our_formations = self.detect_formations(board, color)
 
-        # Opponent threats
         opponent = Defines.BLACK if color == Defines.WHITE else Defines.WHITE
         opp_analysis = self.analyze_position(board, opponent)
         opp_combinations = self.find_threat_combinations(board, opponent)

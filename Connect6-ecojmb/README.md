@@ -1,7 +1,7 @@
 # Connect 6 Engine - ECOJMB
 
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ```
 game_engine.py (Main Controller)
@@ -14,25 +14,6 @@ search_engine.py (Search with all optimizations)
 ├── evaluation.py (Position evaluation)
 └── move_generator.py (Move ordering)
 ```
-
-## 📁 File Structure
-
-### Core Engine Files
-- **game_engine.py** - Main engine, interface handler
-- **search_engine.py** - Alpha-beta with PVS, null-move, LMR, aspiration
-- **evaluation.py** - Pattern-based evaluation function
-- **move_generator.py** - Intelligent move generation and ordering
-
-### Advanced Components
-- **opening_book.py** - Opening theory database with variations
-- **zobrist_hash.py** - Zobrist hashing + transposition table
-- **pattern_recognition.py** - Threat detection and tactical patterns
-
-### Utilities
-- **defines.py** - Constants and data structures
-- **tools.py** - Board operations, move conversion
-
-## 🚀 Quick Start
 
 ### Installation
 ```bash
@@ -64,14 +45,14 @@ exit          # Quit
 pip install pyinstaller
 
 # Build standalone executable
-pyinstaller --onefile --name ecojmb game_engine.py
+pyinstaller --onefile --name game_engine.py
 
 # Run
-./dist/ecojmb     # Linux/Mac
+./dist/ecojmb     # Linux/Mac if name in the above command was ecojmb
 dist\ecojmb.exe   # Windows
 ```
 
-## 🎮 Playing Against Other Engines
+## Playing Against Other Engines
 
 ### Configuration
 For competitive play, use these settings:
@@ -88,13 +69,7 @@ self.m_time_limit = 5.0     # 5 seconds per move
 ```
 
 
-### Key Algorithms
-- **Alpha-Beta Pruning**: Core search algorithm
-- **Iterative Deepening**: Progressive depth increase
-- **Transposition Tables**: Position caching
-- **Principal Variation Search**: Optimized alpha-beta
-- **Null-Move Pruning**: Fast position evaluation
-- **Late Move Reductions**: Selective depth reduction
+
 
 
 

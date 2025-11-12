@@ -51,10 +51,10 @@ class TestSuite:
         print('='*60)
 
         if self.failed == 0:
-            print("✓ ALL TESTS PASSED - Engine is ready!")
+            print(" ALL TESTS PASSED - Engine is ready!")
             return True
         else:
-            print(f"✗ {self.failed} tests failed - review errors above")
+            print(f" {self.failed} tests failed - review errors above")
             return False
 
 

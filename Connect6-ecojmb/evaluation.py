@@ -10,11 +10,10 @@ class Evaluator:
         # Initialize pattern recognizer
         self.pattern_recognizer = PatternRecognizer()
 
-        # Core evaluation weights
         self.weights = {
             # Material/Tactical
             'win': 10000000,
-            'pattern_score': 1.0,      # Use pattern recognizer scores directly
+            'pattern_score': 1.0,
 
             # Positional factors
             'center_control': 8,
@@ -27,7 +26,6 @@ class Evaluator:
             'development': 6,
         }
 
-        # Evaluation cache for performance
         self.eval_cache = {}
         self.cache_hits = 0
         self.cache_misses = 0
@@ -64,7 +62,6 @@ class Evaluator:
         return int(total)
 
     def _is_won(self, board, color):
-        """Quick check if color has won."""
         directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
 
         for x in range(1, 20):
@@ -135,7 +132,6 @@ class Evaluator:
         return score
 
     def _count_adjacent_empty(self, board, x, y):
-        """Count empty squares adjacent to (x, y)."""
         count = 0
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
@@ -214,7 +210,7 @@ class Evaluator:
 
         return score
 
-    # ===== Tactical Analysis Methods =====
+    # Tactical Analysis funtions
 
     def detect_immediate_win(self, board, color):
 

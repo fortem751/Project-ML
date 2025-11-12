@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""
-Quick diagnostic test - finds what's hanging
-"""
+
+# Quick Diagnostics Test
 
 import sys
 from defines import *
@@ -15,60 +14,60 @@ print("="*60)
 print("\n1. Testing imports...")
 try:
     from evaluation import Evaluator
-    print("   ✓ Evaluator imported")
+    print("    Evaluator imported")
 except Exception as e:
-    print(f"   ✗ Evaluator failed: {e}")
+    print(f"    Evaluator failed: {e}")
     sys.exit(1)
 
 try:
     from pattern_recognition import PatternRecognizer
-    print("   ✓ PatternRecognizer imported")
+    print("    PatternRecognizer imported")
 except Exception as e:
-    print(f"   ✗ PatternRecognizer failed: {e}")
+    print(f"    PatternRecognizer failed: {e}")
     sys.exit(1)
 
 try:
     from move_generator import MoveGenerator
-    print("   ✓ MoveGenerator imported")
+    print("    MoveGenerator imported")
 except Exception as e:
-    print(f"   ✗ MoveGenerator failed: {e}")
+    print(f"    MoveGenerator failed: {e}")
     sys.exit(1)
 
 try:
     from search_engine import SearchEngine
-    print("   ✓ SearchEngine imported")
+    print("    SearchEngine imported")
 except Exception as e:
-    print(f"   ✗ SearchEngine failed: {e}")
+    print(f"    SearchEngine failed: {e}")
     sys.exit(1)
 
 # Test 2: Create objects
 print("\n2. Creating objects...")
 try:
     evaluator = Evaluator()
-    print("   ✓ Evaluator created")
+    print("    Evaluator created")
 except Exception as e:
-    print(f"   ✗ Evaluator creation failed: {e}")
+    print(f"    Evaluator creation failed: {e}")
     sys.exit(1)
 
 try:
     recognizer = PatternRecognizer()
-    print("   ✓ PatternRecognizer created")
+    print("    PatternRecognizer created")
 except Exception as e:
-    print(f"   ✗ PatternRecognizer creation failed: {e}")
+    print(f"    PatternRecognizer creation failed: {e}")
     sys.exit(1)
 
 try:
     generator = MoveGenerator()
-    print("   ✓ MoveGenerator created")
+    print("    MoveGenerator created")
 except Exception as e:
     print(f"   ✗ MoveGenerator creation failed: {e}")
     sys.exit(1)
 
 try:
     engine = SearchEngine()
-    print("   ✓ SearchEngine created")
+    print("    SearchEngine created")
 except Exception as e:
-    print(f"   ✗ SearchEngine creation failed: {e}")
+    print(f"    SearchEngine creation failed: {e}")
     sys.exit(1)
 
 # Test 3: Basic board operations
@@ -76,9 +75,9 @@ print("\n3. Testing board operations...")
 try:
     board = [[0] * Defines.GRID_NUM for _ in range(Defines.GRID_NUM)]
     init_board(board)
-    print("   ✓ Board initialized")
+    print("    Board initialized")
 except Exception as e:
-    print(f"   ✗ Board init failed: {e}")
+    print(f"    Board init failed: {e}")
     sys.exit(1)
 
 # Test 4: Pattern recognition
@@ -90,9 +89,9 @@ try:
 
     analysis = recognizer.analyze_position(board, Defines.BLACK)
     print(
-        f"   ✓ Pattern analysis works (found {len(analysis['threats'])} threats)")
+        f"   Pattern analysis works (found {len(analysis['threats'])} threats)")
 except Exception as e:
-    print(f"   ✗ Pattern analysis failed: {e}")
+    print(f"   Pattern analysis failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
@@ -101,9 +100,9 @@ except Exception as e:
 print("\n5. Testing evaluation...")
 try:
     score = evaluator.evaluate_position(board, Defines.BLACK)
-    print(f"   ✓ Evaluation works (score: {score})")
+    print(f"    Evaluation works (score: {score})")
 except Exception as e:
-    print(f"   ✗ Evaluation failed: {e}")
+    print(f"    Evaluation failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
@@ -113,9 +112,9 @@ print("\n6. Testing move generation...")
 try:
     moves = generator.generate_moves(
         board, Defines.BLACK, depth=0, max_moves=10)
-    print(f"   ✓ Move generation works (generated {len(moves)} moves)")
+    print(f"    Move generation works (generated {len(moves)} moves)")
 except Exception as e:
-    print(f"   ✗ Move generation failed: {e}")
+    print(f"   Move generation failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)
@@ -128,7 +127,7 @@ try:
     board2[10][10] = Defines.BLACK
 
     engine.before_search(board2, Defines.WHITE, 1)
-    engine.move_number = 10  # Past opening book
+    engine.move_number = 10
 
     best_move = StoneMove()
     print("   Starting search...")
@@ -138,12 +137,12 @@ try:
     score = engine.iterative_deepening_search(1, 2.0, Defines.WHITE, best_move)
     elapsed = time.time() - start
 
-    print(f"   ✓ Search works (took {elapsed:.2f}s, score: {score})")
+    print(f"    Search works (took {elapsed:.2f}s, score: {score})")
 except KeyboardInterrupt:
-    print("   ✗ Search HUNG (interrupted by user)")
+    print("    Search HUNG (interrupted by user)")
     sys.exit(1)
 except Exception as e:
-    print(f"   ✗ Search failed: {e}")
+    print(f"    Search failed: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)

@@ -1,6 +1,4 @@
-"""
- Main Game Engine - 
-"""
+
 
 from defines import *
 from tools import init_board, make_move, is_win_by_premove, msg2move, move2msg, print_board, log_to_file
@@ -39,7 +37,7 @@ class GameEngine:
         self.move_count = 0
 
     def on_help(self):
-        print(f"=== {self.m_engine_name} -  ecojmb ===")
+        # print(f"=== {self.m_engine_name} ===")
         print("Commands:")
         print("  name          - Print engine name")
         print("  print         - Print current board")
@@ -94,7 +92,7 @@ class GameEngine:
 
     # This function defines the main game loop
     def run(self):
-        print(f"\n{self.m_engine_name} - ecojmb ")
+        print(f"\n{self.m_engine_name}.Connect6 ")
         print("=" * 60)
         self.on_help()
 
