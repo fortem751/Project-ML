@@ -1,9 +1,9 @@
-# TIA.Connect6 Game Engine - Ecojmb
+# Connect6 Game Engine - Ecojmb
 
 
 ## 📁 Project Structure
 
-### Modular 9-File Architecture
+
 
 ```
 TIA.Connect6/
