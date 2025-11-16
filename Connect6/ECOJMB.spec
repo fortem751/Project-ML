@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='TIA_Connect6',
+    name='ECOJMB',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
